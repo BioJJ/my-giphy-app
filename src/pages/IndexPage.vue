@@ -1,14 +1,17 @@
 <template>
   <div>
-    <div class="text-h6 q-mb-md">Título da Página</div>
-    <div>
+    <div class="text-h6 q-mb-md">Em alta</div>
+    <div class="search-bar-container">
       <q-input
         v-model="searchTerm"
         @keyup.enter="searchGifs"
-        placeholder="Pesquisar GIFs"
+        placeholder="Search all the GIFs"
         clearable
+        outlined
+        dense
+        class="search-input"
       />
-      <q-btn @click="searchGifs" label="Buscar" />
+      <q-btn flat round icon="search" @click="searchGifs" class="search-button" />
     </div>
     <q-page class="grid-container">
       <div v-if="gifs.length === 0">Carregando GIFs...</div>
@@ -63,12 +66,38 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 25px;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 5px;
+  flex-grow: 1;
+}
+
+.search-button {
+  background: linear-gradient(135deg, #ff4081, #f50057);
+  color: #000;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .grid-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
