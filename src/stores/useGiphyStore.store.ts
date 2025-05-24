@@ -1,19 +1,26 @@
 import axios from 'axios';
 import { defineStore } from 'pinia';
+import type { Gif } from 'src/model/Gifs.model';
 
 export const useGiphyStore = defineStore('giphy', {
   state: () => ({
-    gifs: [],
+    gifs: [] as Gif[],
     favoritos: JSON.parse(localStorage.getItem('favoritos') || '[]'),
   }),
   actions: {
     async fetchGifs(trending = true, search = '') {
+      const apiKey = import.meta.env.VITE_APP_KEY;
       const url = trending
-        ? 'https://api.giphy.com/v1/gifs/trending?api_key=YOUR_API_KEY&limit=25'
-        : `https://api.giphy.com/v1/gifs/search?api_key=YOUR_API_KEY&q=${search}&limit=25`;
+        ? `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25`
+        : `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${search}&limit=25`;
 
-      const response = await axios.get(url);
-      this.gifs = response.data.data;
+      try {
+        const response = await axios.get(url);
+        console.log('Response:', response);
+        this.gifs = response.data.data;
+      } catch (error) {
+        console.error('Erro ao buscar GIFs:', error);
+      }
     },
     addToFavoritos(gif: unknown) {
       this.favoritos.push(gif);
