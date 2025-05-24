@@ -16,18 +16,17 @@ export const useGiphyStore = defineStore('giphy', {
 
       try {
         const response = await axios.get(url);
-        console.log('Response:', response);
         this.gifs = response.data.data;
       } catch (error) {
         console.error('Erro ao buscar GIFs:', error);
       }
     },
-    addToFavoritos(gif: unknown) {
+    addToFavoritos(gif: Gif) {
       this.favoritos.push(gif);
       localStorage.setItem('favoritos', JSON.stringify(this.favoritos));
     },
-    removeFromFavoritos(gifId: unknown) {
-      this.favoritos = this.favoritos.filter((gif: { id: unknown }) => gif.id !== gifId);
+    removeFromFavoritos(gifId: string) {
+      this.favoritos = this.favoritos.filter((gif: Gif) => gif.id !== gifId);
       localStorage.setItem('favoritos', JSON.stringify(this.favoritos));
     },
   },
