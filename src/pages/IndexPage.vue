@@ -32,7 +32,7 @@
             class="w-full h-48 object-cover rounded-lg mb-2 shadow-lg"
           />
           <q-btn
-            @click="() => store.addToFavoritos(gif)"
+            @click="() => store.addToFavorites(gif)"
             label="Favoritar"
             class="block w-full mx-auto bg-blue-500 hover:bg-pink-600 text-black rounded-full"
           />

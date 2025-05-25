@@ -15,7 +15,7 @@
             />
           </div>
           <q-btn
-            @click="() => store.addToFavoritos(gif)"
+            @click="() => store.addToFavorites(gif)"
             label="Favoritar"
             class="mt-2 bg-blue-500 text-white"
           />

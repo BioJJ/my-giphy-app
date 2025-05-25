@@ -8,7 +8,7 @@
           <img src="/src/assets/logo-2.png" alt="Logo" class="mr-2" />
         </q-toolbar-title>
 
-        <div class="mr-4">NOME PROGRAMADOR</div>
+        <div class="mr-4">Jefferson Coelho</div>
         <q-icon name="account_circle" size="lg" />
       </q-toolbar>
     </q-header>
