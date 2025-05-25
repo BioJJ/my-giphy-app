@@ -1,27 +1,40 @@
 <template>
   <div>
-    <div class="text-h6 q-mb-md">Em alta</div>
-    <div class="search-bar-container">
+    <div class="text-3xl font-bold mb-6 text-black p-6">Em alta</div>
+    <div class="flex items-center w-full px-6 shadow-md mb-6">
       <q-input
         v-model="searchTerm"
         @keyup.enter="searchGifs"
-        placeholder="Search all the GIFs"
+        placeholder="Pesquisar todos os GIFs"
         clearable
         outlined
-        dense
-        class="search-input"
+        class="flex-grow p-3 rounded-full"
       />
-      <q-btn flat round icon="search" @click="searchGifs" class="search-button" />
+      <q-btn
+        flat
+        round
+        icon="search"
+        @click="searchGifs"
+        class="text-black w-12 h-12 flex items-center justify-center ml-2 rounded-full"
+      />
     </div>
-    <q-page class="grid-container">
-      <div v-if="gifs.length === 0">Carregando GIFs...</div>
-      <div v-else class="grid">
-        <div v-for="gif in gifs" :key="gif.id" class="gif-container">
-          <img :src="gif.images.fixed_height.url" :alt="gif.title" height="200" />
+
+    <q-page class="flex flex-col items-center">
+      <div v-if="gifs.length === 0" class="text-center">Carregando GIFs...</div>
+      <div
+        v-else
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full px-4"
+      >
+        <div v-for="gif in gifs" :key="gif.id" class="text-center">
+          <img
+            :src="gif.images.fixed_height.url"
+            :alt="gif.title"
+            class="w-full h-48 object-cover rounded-lg mb-2 shadow-lg"
+          />
           <q-btn
             @click="() => store.addToFavoritos(gif)"
             label="Favoritar"
-            class="favorite-button"
+            class="block w-full mx-auto bg-blue-500 hover:bg-pink-600 text-black rounded-full"
           />
         </div>
       </div>
@@ -63,55 +76,3 @@ onMounted(async () => {
   await fetchGifs();
 });
 </script>
-
-<style scoped>
-.search-bar-container {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  border-radius: 25px;
-  overflow: hidden;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.search-input {
-  padding: 5px;
-  flex-grow: 1;
-}
-
-.search-button {
-  background: linear-gradient(135deg, #ff4081, #f50057);
-  color: #000;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.grid-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-  width: 100%;
-}
-
-.gif-container {
-  text-align: center;
-}
-img {
-  max-width: 200px;
-}
-.favorite-button {
-  display: block;
-  margin: 10px auto;
-}
-</style>
