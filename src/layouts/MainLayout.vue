@@ -1,20 +1,19 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-primary text-white" elevated>
+    <q-header class="bg-blue-600 text-white shadow-md">
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title>
-          <!-- Substitua por seu logo -->
-          <img src="/src/assets/logo-2.png" alt="Logo" class="q-mr-sm" />
+          <img src="/src/assets/logo-2.png" alt="Logo" class="mr-2" />
         </q-toolbar-title>
 
-        <div class="q-mr-md">NOME PROGRAMADOR</div>
+        <div class="mr-4">Jefferson Coelho</div>
         <q-icon name="account_circle" size="lg" />
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above class="bg-dark text-white" bordered>
+    <q-drawer v-model="leftDrawerOpen" show-if-above class="bg-gray-800 text-white" bordered>
       <q-list>
         <q-item to="/" clickable v-ripple>
           <q-item-section avatar>
@@ -47,7 +46,7 @@
     </q-drawer>
 
     <q-page-container>
-      <q-page padding>
+      <q-page class="p-4">
         <router-view />
       </q-page>
     </q-page-container>
@@ -63,13 +62,3 @@ function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 </script>
-
-<style>
-.bg-primary {
-  background-color: #1976d2; /* Cor azul do cabeçalho */
-}
-
-.bg-dark {
-  background-color: #001f3f; /* Cor da barra lateral */
-}
-</style>

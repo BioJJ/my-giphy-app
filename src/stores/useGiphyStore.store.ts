@@ -2,12 +2,13 @@ import axios from 'axios';
 import { defineStore } from 'pinia';
 import type { Category } from 'src/model/Category.model';
 import type { Gif } from 'src/model/Gifs.model';
+import { LocalStorage } from 'quasar';
 
 export const useGiphyStore = defineStore('giphy', {
   state: () => ({
     gifs: [] as Gif[],
     categories: [] as Category[],
-    favoritos: JSON.parse(localStorage.getItem('favoritos') || '[]'),
+    favorites: JSON.parse(LocalStorage.getItem('favorites') || '[]'),
   }),
   actions: {
     async fetchGifs(trending = true, search = '') {
@@ -39,13 +40,13 @@ export const useGiphyStore = defineStore('giphy', {
         console.error('Erro ao buscar GIFs:', error);
       }
     },
-    addToFavoritos(gif: Gif) {
-      this.favoritos.push(gif);
-      localStorage.setItem('favoritos', JSON.stringify(this.favoritos));
+    addToFavorites(gif: Gif) {
+      this.favorites.push(gif);
+      LocalStorage.setItem('favorites', JSON.stringify(this.favorites));
     },
-    removeFromFavoritos(gifId: string) {
-      this.favoritos = this.favoritos.filter((gif: Gif) => gif.id !== gifId);
-      localStorage.setItem('favoritos', JSON.stringify(this.favoritos));
+    removeFromFavorites(gifId: string) {
+      this.favorites = this.favorites.filter((gif: Gif) => gif.id !== gifId);
+      LocalStorage.setItem('favorites', JSON.stringify(this.favorites));
     },
   },
 });

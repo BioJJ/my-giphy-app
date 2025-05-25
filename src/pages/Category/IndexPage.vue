@@ -1,24 +1,46 @@
 <template>
-  <div>
-    <div class="text-h6 q-mb-md">Categorias</div>
-    <q-page class="grid-container">
-      <div v-if="searchTerm.length !== 0">
-        <div class="grid">
-          <div v-for="gif in searchTerm" :key="gif.id" class="gif-container">
-            <img :src="gif.images.fixed_height.url" :alt="gif.title" height="250" />
-            <q-btn
-              @click="() => store.addToFavoritos(gif)"
-              label="Favoritar"
-              class="favorite-button"
+  <div class="flex flex-col items-center justify-center">
+    <div class="text-2xl mb-4">Categorias</div>
+    <q-page class="w-full">
+      <div
+        v-if="searchTerm.length !== 0"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      >
+        <div v-for="gif in searchTerm" :key="gif.id" class="text-center">
+          <div class="relative h-[250px] w-full overflow-hidden">
+            <img
+              :src="gif.images.fixed_height.url"
+              :alt="gif.title"
+              class="w-full h-48 object-cover rounded-lg"
             />
           </div>
+          <q-btn
+            @click="() => store.addToFavorites(gif)"
+            label="Favoritar"
+            class="mt-2 bg-blue-500 text-white"
+          />
         </div>
       </div>
-      <div v-else class="grid">
-        <div v-for="category in categories" :key="category.name_encoded" class="gif-container">
-          <div class="image-overlay" @click="() => fetchSubcategories(category)">
-            <img :src="category.gif.images.fixed_height.url" :alt="category.name" height="250" />
-            <div class="overlay-text">{{ category.name.toUpperCase() }}</div>
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          v-for="category in categories"
+          :key="category.name_encoded"
+          class="text-center relative"
+        >
+          <div
+            @click="() => fetchSubcategories(category)"
+            class="relative h-[250px] w-full overflow-hidden"
+          >
+            <img
+              :src="category.gif.images.fixed_height.url"
+              :alt="category.name"
+              class="w-full h-48 object-cover rounded-lg"
+            />
+            <div
+              class="absolute inset-0 flex items-center justify-center bg-opacity-50 text-white font-bold text-lg"
+            >
+              {{ category.name.toUpperCase() }}
+            </div>
           </div>
         </div>
       </div>
@@ -55,46 +77,5 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.grid-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-  width: 100%;
-}
-
-.gif-container {
-  text-align: center;
-}
-
-.image-overlay {
-  position: relative;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-.overlay-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-}
-
-.favorite-button {
-  display: block;
-  margin: 10px auto;
-}
+/* A seção de estilo pode ser removida se não houver mais estilos personalizados */
 </style>
