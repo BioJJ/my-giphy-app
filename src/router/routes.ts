@@ -6,6 +6,21 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
   },
+  {
+    path: '/favoritos',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/Favorite/IndexPage.vue') }],
+  },
+  {
+    path: '/categorias',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/Category/IndexPage.vue') }],
+  },
+  {
+    path: '/sobre',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/Subject/IndexPage.vue') }],
+  },
 
   // Always leave this as last one,
   // but you can also remove it
