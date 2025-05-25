@@ -42,7 +42,6 @@ const { gifs } = storeToRefs(store);
 const fetchGifs = async () => {
   try {
     await store.fetchGifs(true);
-    console.log('Response:', gifs);
   } catch (error) {
     console.error('Erro ao buscar GIFs:', error);
   }
